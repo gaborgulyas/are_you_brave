@@ -33,6 +33,7 @@ date_default_timezone_set('Europe/Paris');
     </div>
 
 	<p id="verdict" class="w3-xlarge"></p>
+    <p id="verdict2" class="w3-medium"></p>
 
     <div class="w3-container w3-center" style="padding-top: 32px; padding-bottom: 16px;">
         Are You Brave? &ndash; &copy; <?php echo date("Y"); ?> all rights reserved &ndash; Check also: <a href="https://extensions.inrialpes.fr" style="color: #FFFFFF; font-weight: bold; text-decoration: underline">https://extensions.inrialpes.fr</a>
@@ -55,8 +56,16 @@ date_default_timezone_set('Europe/Paris');
             },
             error: function(result)
             {
-                $("#main").addClass("w3-red")
-                $("#verdict").html("This doesn't seem to be the Brave browser, but rather it seems a <code style='text-decoration: underline'>"+bowser.name+" browser</code> instead.")
+                if(bowser.name == "Chrome" && $.browser.mobile)
+                {
+                    $("#main").addClass("w3-orange")
+                    $("#verdict").html("Hey, you <i>could be</i> using the <code style='text-decoration: underline'>mobile Brave browser</code>. However, we are not detecting this for now.")
+                }
+                else
+                {
+                    $("#main").addClass("w3-red")
+                    $("#verdict").html("This doesn't seem to be the Brave browser, but rather it seems a <code style='text-decoration: underline'>"+bowser.name+" browser</code> instead.")
+                }
             },
         });
 	});
